@@ -1,0 +1,34 @@
+This program demonstrates a memory allocation class using vectors
+Author: Frankie Gauthier
+Class: CS2010 Lab4
+
+Compile
+--------
+
+-to compile the program simply type "make" on the cmd line in the CS2010Lab4 directory
+
+-to run type ./memory and observe the output
+
+Output
+-------
+
+- the program creates memory with a default size of 100
+
+- the program fills each mem location with its index value
+  so memory is 100 units filled with 0-99
+
+- then the even numbers are set to 0
+
+- then memory is copied from 20-35 to 40-55
+
+- the memory is then dumped from loc 40-55 to show the result
+
+- all of memory is then dumped at the end to show its final state
+
+
+Repository
+-----------
+https://github.com/frgauthi/CS2010Lab4.git
+
+
+
