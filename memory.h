@@ -1,6 +1,6 @@
-// This header file contains the template for the memory simulation program using vectors
+// This header file contains the template for the memory simulation program using vectors and overloaded operators
 // Frankie Gauthier
-// CS2010 Lab 4
+// CS2010 Lab 5
 
 #ifndef memory_h
 #define memory_h
@@ -30,9 +30,17 @@ class memory{
 	void store(int,int);
 	void memCopy(int,int,int);
 	int sizeOf(void);
+	int getElement(int);
+	bool memEqual(memory&);
+
+	int &operator[](int);
+	const int &operator[](int) const;
+	
 };
 
 std::ostream &operator<<(std::ostream &, const memory&);
+memory operator+(memory&, memory&);
+bool operator==(memory&,memory&);
 
 
 #endif

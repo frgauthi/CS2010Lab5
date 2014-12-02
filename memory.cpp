@@ -1,20 +1,66 @@
-// This file contains the function source code for the memory simulation program using vectors
+// This file contains the function source code for the memory simulation program using vectors and overloaded operators
 // Frankie Gauthier
-// CS2010 Lab 4
+// CS2010 Lab 5
 
 #include "memory.h"
 
 
-
-void memory::copy(memory& mem){
-	vector<int> tmp = mem.m;
-	tmp.size = mem.size;
+// overloading equality operator to determine if two memories contain the same elements
+// takes two references to memory
+// returns a boolean indicating the equality
+bool operator==(memory& left, memory& right){
+	return left.memEqual(right);
 }
 
-//over loading output operator to allow cout << memory;
+
+
+// overloading addition operator to allow adding corresponding elements of two memories together
+// takes two references to memory
+// returns copy of memory
+memory operator+(memory &left, memory &right){
+	memory m(defaultSize);
+	
+	for(int i = 0; i<right.sizeOf();i++){
+		m.store(i,(left.getElement(i) + right.getElement(i)));
+	}
+	return m;
+
+}
+
+
+
+
+// over loading output operator to allow cout << memory;
+// takes a reference to an output stream and a const reference to memory as parameters
+// returns output stream
 std::ostream &operator<<(std::ostream& out, const memory& m){
 	((memory &)m).dump();
 	return out;
+}
+
+
+
+// overloading subscript operator to return or modify the nth value of memory
+// takes an int as a parameter
+// returns int / const int
+int &memory::operator[](int n){return m[n];}
+const int &memory::operator[](int n) const {return m[n];}
+
+
+
+
+// returns the value of the nth element of memory
+// takes an int as a parameter
+int memory::getElement(int n){
+	return this->m[n];
+}
+
+
+
+//returns a true if two memories are equal in value
+// takes a reference to memory as a parameter
+bool memory::memEqual(memory& right){
+	return (this->m == right.m);
 }
 
 
@@ -33,10 +79,8 @@ int memory::sizeOf(){
 // (m[1] == 1 ... m[99] == 99)
 memory::memory(int size)
 {
-	for(int i =0; i<size; i++){
-		this->m.push_back(i);
-	}
-
+	
+	this->m.resize(size, 0);
 	//this->m.resize(size,0);
 	this->size = size;
 }
@@ -47,7 +91,7 @@ memory::memory(int size)
 // takes no parameters
 // allocates memory based on a default defined size
 memory::memory(){
-	this->m.resize(defaultSize, 0);
+	this->m.resize(defaultSize,0);
 	this->size = defaultSize;
 }
 
